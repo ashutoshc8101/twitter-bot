@@ -15,7 +15,7 @@ let client = new twitter({
 let count;
 let readStream = fs.createReadStream('count.dat')
 readStream.on('data', (chunck) => {
-    count = chunck.toString('utf-8')
+    count = parseInt(chunck.toString('utf-8'))
     
     setInterval(() => {
         client.post('statuses/update', { status: `Tweet #${count}` })
@@ -23,8 +23,10 @@ readStream.on('data', (chunck) => {
                 console.log(tweet.text)
                 let stream = fs.createWriteStream('count.dat')
                 stream.once('open', (fd) => {
-                    stream.write(new Buffer(++count))
-                    stream.end()
+                    stream.write(`${++count}`, (err) => {
+                       if(err) throw err
+                        stream.end()
+                    })
                 })
             })
             .catch(error => {
