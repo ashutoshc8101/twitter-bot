@@ -1,3 +1,3 @@
-# A facebook bot created by Ashutosh Chauhan
+# A twitter bot created by Ashutosh Chauhan
 
-This app is designed to send messages on facebook to friends and __annoy__ people.
+This app is created to tweet messages on twitter and have fun.
